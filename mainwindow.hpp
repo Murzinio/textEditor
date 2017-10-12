@@ -16,8 +16,14 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget* parent = nullptr);
+    QSize minimumSizeHint() const override { return QSize(800, 600); }
 
 private:
     std::unique_ptr<Ui::MainWindow> m_ui;
     TabManager m_tabManager;
+
+private slots:
+    void onActionNew();
+    void onActionOpen();
+    void onActionSave();
 };

@@ -13,7 +13,8 @@
 class Tab
 {
 public:
-    Tab(const QString& name, QTabWidget* tabWidget);
+    Tab(const QString& name, QTabWidget* tabWidget); // new tab
+    Tab(QTabWidget* tabWidget, const QString& path); // tab from file
 
     std::unique_ptr<QWidget>& getWidget() { return m_widget; }
     QString& getName() { return m_name; }

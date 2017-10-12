@@ -15,7 +15,8 @@ class TabManager
 public:
     TabManager(std::unique_ptr<Ui::MainWindow>& ui);
     std::unique_ptr<QTabWidget>& getWidget() { return m_widget; }
-    void createTab(const QString& name);
+    void createTab(QString name);
+    void createTabFromExistingFile(const QString& path);
 
 private:
     std::unique_ptr<Ui::MainWindow>& m_ui;

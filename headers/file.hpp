@@ -2,16 +2,18 @@
 
 #include <QString>
 #include <QFile>
-#include <QDir>
+#include <QTextStream>
 
 class File
 {
 public:
-    File(const QString& m_name);
-private:
-    const QString& m_name; //reference to name in the tab that holds the file
-    QString m_content;
+    File();
 
     void openFile(const QString& path);
     void saveFile(const QString& path);
+
+    QString& getContent() { return m_content; }
+
+private:
+    QString m_content{ "" };
 };
