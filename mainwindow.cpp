@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget* parent) :
 
 void MainWindow::onActionNew()
 {
-    m_tabManager.createTab("");
+    m_tabManager.createTab();
 }
 
 void MainWindow::onActionOpen()
@@ -27,5 +27,8 @@ void MainWindow::onActionOpen()
 
 void MainWindow::onActionSave()
 {
-    m_tabManager.createTab("");
+    if (m_tabManager.currentTabHasPath())
+    {
+        m_tabManager.saveTabToFile();
+    }
 }

@@ -1,23 +1,34 @@
 #include "file.hpp"
 
-File::File()
+QString File::openFile(const QString& path)
 {
-
-}
-
-void File::openFile(const QString &path)
-{
+    QString content;
     QFile file(path);
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        return;
+        return "";
     }
 
     QTextStream input(&file);
 
     while (!input.atEnd())
     {
-        m_content += input.readLine() + "\n";
+        content += input.readLine() + "\n";
     }
+
+    return content;
+}
+
+void File::saveFile(const QString& content, const QString& path)
+{
+    QFile file(path);
+
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        return;
+    }
+
+    QTextStream output(&file);
+    output << content;
 }

@@ -22,6 +22,8 @@ private:
     std::unique_ptr<Ui::MainWindow> m_ui;
     TabManager m_tabManager;
 
+    QString getCurrentTabName();
+
 private slots:
     void onActionNew();
     void onActionOpen();

@@ -24,3 +24,41 @@ void TabManager::createTabFromExistingFile(const QString &path)
     m_tabs.emplace_back(Tab(m_widget.get(), path));
     m_widget->addTab(m_tabs.back().getWidget().get(), m_tabs.back().getName());
 }
+
+void TabManager::saveTabToFile(QString path)
+{
+    auto name = m_widget->tabText(m_widget->currentIndex());
+
+    auto tab = std::find_if(m_tabs.begin(), m_tabs.end(),
+    [&] (Tab& tab)
+    {
+        if(tab.getName() == name) return true; return false;
+    });
+
+    if(tab == m_tabs.end())
+    {
+        return;
+    }
+
+    if (path == "")
+    {
+        tab->saveFile();
+    }
+    else
+    {
+        tab->saveFile(path);
+    }
+}
+
+bool TabManager::currentTabHasPath()
+{
+    auto name = m_widget->tabText(m_widget->currentIndex());
+
+    auto tab = std::find_if(m_tabs.begin(), m_tabs.end(),
+    [&] (Tab& tab)
+    {
+        if(tab.getName() == name) return true; return false;
+    });
+
+    return tab->hasPath();
+}
