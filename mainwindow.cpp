@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget* parent) :
     connect(m_ui->actionNew, SIGNAL(triggered()), this, SLOT(onActionNew()));
     connect(m_ui->actionOpen, SIGNAL(triggered()), this, SLOT(onActionOpen()));
     connect(m_ui->actionSave, SIGNAL(triggered()), this, SLOT(onActionSave()));
+    connect(m_ui->actionSaveAs, SIGNAL(triggered()), this, SLOT(onActionSaveAs()));
 }
 
 void MainWindow::onActionNew()
@@ -31,4 +32,13 @@ void MainWindow::onActionSave()
     {
         m_tabManager.saveTabToFile();
     }
+    else
+    {
+        m_tabManager.saveTabToFile(QFileDialog::getSaveFileName(this, tr("Save File")));
+    }
+}
+
+void MainWindow::onActionSaveAs()
+{
+    m_tabManager.saveTabToFile(QFileDialog::getSaveFileName(this, tr("Save File")));
 }

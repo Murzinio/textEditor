@@ -32,5 +32,6 @@ void Tab::saveFile(const QString& path)
     else
     {
         m_file.saveFile(m_editor->toPlainText(), path);
+        m_name = path.split("/").last();
     }
 }

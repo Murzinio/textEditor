@@ -47,6 +47,7 @@ void TabManager::saveTabToFile(QString path)
     else
     {
         tab->saveFile(path);
+        m_widget->setTabText(m_widget->currentIndex(), tab->getName());
     }
 }
 

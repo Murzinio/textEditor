@@ -28,4 +28,5 @@ private slots:
     void onActionNew();
     void onActionOpen();
     void onActionSave();
+    void onActionSaveAs();
 };
