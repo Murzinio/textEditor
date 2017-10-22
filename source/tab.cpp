@@ -19,6 +19,7 @@ Tab::Tab(QTabWidget* tabWidget, const QString& path) :
 {
     m_name = path.split("/").last();
     m_editor->setPlainText(m_file.openFile(path));
+
     m_layout->addWidget(m_editor.get());
 }
 

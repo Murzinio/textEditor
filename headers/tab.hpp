@@ -7,6 +7,7 @@
 #include <QTabWidget>
 #include <QHBoxLayout>
 
+#include "lineindexer.hpp"
 #include "file.hpp"
 #include "editor.hpp"
 

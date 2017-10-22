@@ -6,13 +6,8 @@ LineIndexer::LineIndexer(QWidget *parent)
         QWidget(parent),
         m_linesCount(1)
 {
-    //this->setMinimumHeight(200);
     this->setMinimumWidth(fontMetrics().width("12345"));
     this->setMaximumWidth(fontMetrics().width("12345"));
-
-    //this->show();
-    //QSizePolicy policy;
-    //policy.setHorizontalStretch(0.1);
 }
 
 void LineIndexer::paintEvent(QPaintEvent *e)
