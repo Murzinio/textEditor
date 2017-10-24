@@ -1,23 +1,27 @@
 #pragma once
 
+#include <vector>
+
 #include <QWidget>
 #include <QPaintEvent>
+#include <QTextBlock>
 
 class LineIndexer : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit LineIndexer(QWidget *parent = nullptr);
+    explicit LineIndexer(QTextBlock firstBLock, QWidget *parent = nullptr);
     QSize sizeHint() const { return {maximumWidth(), 800}; }
 
-    void setLinesCount(const size_t count);
-
+    void setBlocksPositions(const std::vector<size_t>& positions);
+    void setRect(const QRect& rect) { m_rect = rect; }
 protected:
     void paintEvent(QPaintEvent* e) override;
 
 private:
-    size_t m_linesCount;
+    std::vector<size_t> m_blockPositions;
+    QRect m_rect;
 
 signals:
 

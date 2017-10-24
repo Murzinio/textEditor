@@ -1,18 +1,12 @@
 #include "lineindexer.hpp"
 #include <QPainter>
 
-LineIndexer::LineIndexer(QWidget *parent)
+LineIndexer::LineIndexer(QTextBlock firstBLock, QWidget *parent)
     :
-        QWidget(parent),
-        m_linesCount(1)
+        QWidget(parent)
 {
-    //this->setMinimumHeight(200);
     this->setMinimumWidth(fontMetrics().width("12345"));
     this->setMaximumWidth(fontMetrics().width("12345"));
-
-    //this->show();
-    //QSizePolicy policy;
-    //policy.setHorizontalStretch(0.1);
 }
 
 void LineIndexer::paintEvent(QPaintEvent *e)
@@ -25,16 +19,18 @@ void LineIndexer::paintEvent(QPaintEvent *e)
     color.setRgb(100, 200, 0);
     painter.fillRect(rect, color);
 
-    for (int i = 0; i < m_linesCount; ++i)
+    size_t counter{ 1 };
+    for (auto & position : m_blockPositions)
     {
-        painter.drawText(0, (fontMetrics().height() * i),
+        painter.drawText(0, position,
                          width(), fontMetrics().height(),
-                         Qt::AlignRight, QString::number(i + 1));
+                         Qt::AlignRight, QString::number(counter));
+        ++counter;
     }
 }
 
-void LineIndexer::setLinesCount(const size_t count)
+void LineIndexer::setBlocksPositions(const std::vector<size_t> &positions)
 {
-    m_linesCount = count;
+    m_blockPositions = positions;
     update();
 }
