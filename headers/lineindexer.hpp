@@ -15,13 +15,12 @@ public:
     QSize sizeHint() const { return {maximumWidth(), 800}; }
 
     void setBlocksPositions(const std::vector<size_t>& positions);
-    void setRect(const QRect& rect) { m_rect = rect; }
+    void setHeight(const size_t height);
 protected:
     void paintEvent(QPaintEvent* e) override;
 
 private:
     std::vector<size_t> m_blockPositions;
-    QRect m_rect;
 
 signals:
 

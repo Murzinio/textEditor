@@ -5,14 +5,14 @@ LineIndexer::LineIndexer(QTextBlock firstBLock, QWidget *parent)
     :
         QWidget(parent)
 {
-    this->setMinimumWidth(fontMetrics().width("12345"));
-    this->setMaximumWidth(fontMetrics().width("12345"));
+    setMinimumWidth(fontMetrics().width("12345"));
+    setMaximumWidth(fontMetrics().width("12345"));
 }
 
 void LineIndexer::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
-    QRect rect{ 0, 0, maximumWidth(), 800 };
+    QRect rect{ 0, 0, maximumWidth(), maximumHeight() };
 
     QColor color;
 
@@ -20,6 +20,7 @@ void LineIndexer::paintEvent(QPaintEvent *e)
     painter.fillRect(rect, color);
 
     size_t counter{ 1 };
+
     for (auto & position : m_blockPositions)
     {
         painter.drawText(0, position,
@@ -33,4 +34,10 @@ void LineIndexer::setBlocksPositions(const std::vector<size_t> &positions)
 {
     m_blockPositions = positions;
     update();
+}
+
+void LineIndexer::setHeight(const size_t height)
+{
+    setMinimumHeight(height);
+    setMaximumHeight(height);
 }
