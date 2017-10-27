@@ -16,13 +16,11 @@ public:
 
     void setBlocksPositions(const std::vector<size_t>& positions);
     void setHeight(const size_t height);
+    void setFirstBlockNumber(const size_t number) { m_firstBlockNumber = number; }
 protected:
     void paintEvent(QPaintEvent* e) override;
 
 private:
     std::vector<size_t> m_blockPositions;
-
-signals:
-
-public slots:
+    size_t m_firstBlockNumber;
 };

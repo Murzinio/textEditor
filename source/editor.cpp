@@ -1,4 +1,5 @@
 #include <QTextBlock>
+#include <QScrollBar>
 
 #include "editor.hpp"
 
@@ -9,6 +10,7 @@ Editor::Editor(QWidget* parent)
 {
     setViewportMargins({ 28, 0, 0, 0 });
     connect(this, SIGNAL(textChanged()), this, SLOT(onTextChanged()));
+    connect(this->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(onScrollValueChanged()));
 }
 
 void Editor::resizeEvent(QResizeEvent *e)
@@ -18,6 +20,16 @@ void Editor::resizeEvent(QResizeEvent *e)
 }
 
 void Editor::onTextChanged()
+{
+    updateIndexer();
+}
+
+void Editor::onScrollValueChanged()
+{
+    updateIndexer();
+}
+
+void Editor::updateIndexer()
 {
     std::vector<size_t> positions;
     auto block = firstVisibleBlock();
@@ -30,4 +42,5 @@ void Editor::onTextChanged()
     }
 
     m_lineIndexer->setBlocksPositions(positions);
+    m_lineIndexer->setFirstBlockNumber(firstVisibleBlock().blockNumber());
 }

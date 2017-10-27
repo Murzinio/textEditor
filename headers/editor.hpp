@@ -19,6 +19,9 @@ protected:
 private:
     std::unique_ptr<LineIndexer> m_lineIndexer;
 
-public slots:
+    void updateIndexer();
+
+private slots:
     void onTextChanged();
+    void onScrollValueChanged();
 };

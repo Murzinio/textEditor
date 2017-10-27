@@ -19,13 +19,13 @@ void LineIndexer::paintEvent(QPaintEvent *e)
     color.setRgb(100, 200, 0);
     painter.fillRect(rect, color);
 
-    size_t counter{ 1 };
+    size_t counter{ m_firstBlockNumber + 1};
 
     for (auto & position : m_blockPositions)
     {
         painter.drawText(0, position,
                          width(), fontMetrics().height(),
-                         Qt::AlignRight, QString::number(counter));
+                         Qt::AlignCenter, QString::number(counter));
         ++counter;
     }
 }
