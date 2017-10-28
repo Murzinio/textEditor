@@ -1,8 +1,12 @@
 #pragma once
 
-#include <memory>
 #include <vector>
+#include <memory>
+
 #include <QTabWidget>
+#include <QPointer>
+#include <QScopedPointer>
+
 #include "tab.hpp"
 
 namespace Ui
@@ -13,15 +17,16 @@ namespace Ui
 class TabManager
 {
 public:
-    TabManager(std::unique_ptr<Ui::MainWindow>& ui);
-    std::unique_ptr<QTabWidget>& getWidget() { return m_widget; }
+    TabManager(Ui::MainWindow* ui);
+    ~TabManager() {}
+    QPointer<QTabWidget> getWidget() { return m_widget.data(); }
     void createTab(QString name = "");
     void createTabFromExistingFile(const QString& path);
     void saveTabToFile(QString path = "");
     bool currentTabHasPath();
 
 private:
-    std::unique_ptr<Ui::MainWindow>& m_ui;
-    std::unique_ptr<QTabWidget> m_widget;
+    Ui::MainWindow* m_ui;
+    QScopedPointer<QTabWidget> m_widget;
     std::vector<Tab> m_tabs;
 };

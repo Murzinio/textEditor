@@ -1,7 +1,9 @@
 #pragma once
 
-#include <memory>
+#include <QScopedPointer>
+#include <QPointer>
 #include <QMainWindow>
+
 #include "tabmanager.hpp"
 #include "ui_mainwindow.h"
 
@@ -19,7 +21,7 @@ public:
     QSize minimumSizeHint() const override { return QSize(800, 600); }
 
 private:
-    std::unique_ptr<Ui::MainWindow> m_ui;
+    QScopedPointer<Ui::MainWindow> m_ui;
     TabManager m_tabManager;
 
     QString getCurrentTabName();

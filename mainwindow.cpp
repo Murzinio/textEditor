@@ -4,11 +4,11 @@
 
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
-    m_ui(std::make_unique<Ui::MainWindow>()),
-    m_tabManager(m_ui)
+    m_ui(new Ui::MainWindow),
+    m_tabManager(m_ui.data())
 {
     m_ui->setupUi(this);
-    setCentralWidget(m_tabManager.getWidget().get());
+    setCentralWidget(m_tabManager.getWidget());
 
     connect(m_ui->actionNew, SIGNAL(triggered()), this, SLOT(onActionNew()));
     connect(m_ui->actionOpen, SIGNAL(triggered()), this, SLOT(onActionOpen()));

@@ -1,8 +1,7 @@
 #pragma once
 
-#include <memory>
-
 #include <QPlainTextEdit>
+#include <QPointer>
 
 #include "lineindexer.hpp"
 
@@ -17,7 +16,7 @@ protected:
     void resizeEvent(QResizeEvent* e) override;
 
 private:
-    std::unique_ptr<LineIndexer> m_lineIndexer;
+    QPointer<LineIndexer> m_lineIndexer;
 
     void updateIndexer();
 
